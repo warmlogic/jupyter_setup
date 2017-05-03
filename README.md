@@ -16,7 +16,8 @@ The server configuration script requires a couple manual steps:
 ``` python
 ipython
 from IPython.lib import passwd
-passwd()```
+passwd()
+```
 
 - Type in your desired password for the server.
 - Copy the resulting hash and paste it on the line of `jupyter_userdata.sh` that begins with `c.NotebookApp.password`.
