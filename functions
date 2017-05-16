@@ -6,7 +6,7 @@ nb-presentationnb () {
     # `nb-presentationnb project_findings` would yield a file named:
     # 2016-08-12_mvm_project_findings.ipynb
     wget -nc --show-progress --header "Accept: application/vnd.github.v3.raw" \
-    -O date +%Y-%m-%d`_${myinitials}_$1.ipynb \
+    -O `date +%Y-%m-%d`_${myinitials}_$1.ipynb \
     https://api.github.com/repos/warmlogic/jupyter_setup/contents/notebooks/template-presentation-python.ipynb
 }
 
@@ -17,7 +17,7 @@ nb-dailynb () {
     # `nb-dailynb exploratory_data_analysis` would yield a file named:
     # 2016-08-12_mvm_exploratory_data_analysis.ipynb
     wget -nc --show-progress --header "Accept: application/vnd.github.v3.raw" \
-    -O date +%Y-%m-%d`_${myinitials}_$1.ipynb \
+    -O `date +%Y-%m-%d`_${myinitials}_$1.ipynb \
     https://api.github.com/repos/warmlogic/jupyter_setup/contents/notebooks/template-daily-python.ipynb
 }
 
