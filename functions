@@ -23,30 +23,56 @@ nb-dailynb () {
 
 # Create directory structure in current working directory
 # Inspired by https://drivendata.github.io/cookiecutter-data-science/
-nb-create-project () {
+# TODO: initialize Makefile, requirements.txt, split notebook (develop/deliver?)
+function nb-create-project () {
     directories='data
     docs
+    models
     notebooks
+    references
     reports
     src'
 
-    ignore='.DS_Store\n*~\n*.pyc\n.ipynb_checkpoints\n__pycache__\n'
+    ignore='.DS_Store\n*~\n*.pyc\n.ipynb_checkpoints\n__pycache__\n/data\n.env\nconfig.ini\n'
     ignore_nb='.DS_Store\n*~\n*.pyc\n.ipynb_checkpoints\n__pycache__\n'
 
-    touch README.md
-    echo -e ${ignore} >> .gitignore
+    if [ ! -f README.md ]; then
+        touch README.md
+    else
+        echo 'README.md already exists, not touching'
+    fi
+    if [ ! -f .gitignore ]; then
+        echo -e ${ignore} >> .gitignore
+    else
+        echo './.gitignore already exists, not initializing'
+    fi
     for dir_name in ${directories}
     do
       mkdir -p $dir_name
       if [ $dir_name = "src" ]; then
-        # mkdir -p $dir_name/sql
         touch $dir_name/__init__.py
         mkdir -p $dir_name/data
         mkdir -p $dir_name/features
         mkdir -p $dir_name/models
+        mkdir -p $dir_name/visualization
+        # mkdir -p $dir_name/sql
+        touch $dir_name/data/__init__.py
+        touch $dir_name/features/__init__.py
+        touch $dir_name/models/__init__.py
+        touch $dir_name/visualization/__init__.py
+      fi
+      if [ $dir_name = "data" ]; then
+        mkdir -p $dir_name/external
+        mkdir -p $dir_name/interim
+        mkdir -p $dir_name/processed
+        mkdir -p $dir_name/raw
       fi
       if [ $dir_name = "notebooks" ]; then
-        echo -e ${ignore_nb} >> $dir_name/.gitignore
+        if [ ! -f $dir_name/.gitignore ]; then
+          echo -e ${ignore_nb} >> $dir_name/.gitignore
+        else
+          echo $dir_name'/.gitignore already exists, not initializing'
+        fi
       fi
     done
 }
