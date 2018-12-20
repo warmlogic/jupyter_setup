@@ -21,6 +21,7 @@ if [ ! -f "$JUPYTER_CONFIG_DIR/jupyter_notebook_config.py" ]; then
 # Set options for certfile, ip, password, and toggle off browser auto-opening
 c.NotebookApp.certfile = u'$CERTIFICATE_DIR/mycert.pem'
 c.NotebookApp.keyfile = u'$CERTIFICATE_DIR/mykey.key'
+c.NotebookApp.allow_remote_access = True
 # Set ip to '*' to bind on all interfaces (ips) for the public server
 c.NotebookApp.ip = '*'
 c.NotebookApp.password = u'$jupass'
